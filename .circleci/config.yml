@@ -55,7 +55,7 @@ jobs:
           name: Unzip artifacts
           command: |
             mkdir -p $EXTRACT_DEST
-            tar -xvzf artifacts/pal-tracker-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
+            tar -xvzf artifacts/pal-tracke-netr-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
 
       - run:
           name: Deploy
@@ -95,12 +95,12 @@ jobs:
       - run:
           name: Install flyway
           command: |
-            curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.1/flyway-commandline-5.1
+            curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.1/flyway-commandline-5.1.1-linux-x64.tar.gz | tar xvz
       - run:
           name: Unzip artifacts
           command: |
             mkdir -p $EXTRACT_DEST
-            tar -xvzf artifacts/pal-tracker-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
+            tar -xvzf artifacts/pal-tracker-net-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
 
       - run:
           name: Deploy
@@ -109,7 +109,7 @@ jobs:
 
             cf login -a $CF_API -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s $ENVIRONMENT
             cf push -f manifest-$ENVIRONMENT.yml
-            bash ./migrate-databases.sh pal-tracker . /root/project
+            bash ./migrate-databases.sh pal-tracker-net . /root/project
 
 workflows:
   version: 2
