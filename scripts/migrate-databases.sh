@@ -3,7 +3,8 @@ set -e
 
 
 app_guid=`cf app $1 --guid`
-credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | if .["p-mysql"] != null then .["p-mysql"] else .["p.mysql"] end | .[0].credentials'`
+//credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | if .["p-mysql"] != null then .["p-mysql"] else .["p.mysql"] end | .[0].credentials'`
+credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name=="tracker-database") | .credentials'`
 
 
 ip_address=`echo $credentials | jq -r '.hostname'`
@@ -19,6 +20,6 @@ echo "Waiting for tunnel"
 sleep 5
 
 # Passing this in as a param is a bit strage. Maybe put flyway on the path?
-$3/flyway-*/flyway -url="jdbc:mysql://127.0.0.1:63306/pal-tracker-net" -locations=filesystem:$2/databases/tracker -user=$db_username -password=$db_password migrate
+$3/flyway-*/flyway -url="jdbc:mysql://127.0.0.1:63306/$db_name" -locations=filesystem:$2/databases/tracker -user=$db_username -password=$db_password migrate
 
 kill -STOP $cf_ssh_pid
