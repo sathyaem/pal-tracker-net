@@ -18,4 +18,4 @@ cp -r databases $build_output
 dotnet publish src/PalTracker --configuration Release \
     --output $build_output/src/PalTracker/bin/Release/netcoreapp2.1/publish
 
-tar -C $build_output/ -cvzf $artifacts_path/pal-tracker-$version.tgz .
+tar -C $build_output/ -cvzf $artifacts_path/pal-tracker-net-$version.tgz .

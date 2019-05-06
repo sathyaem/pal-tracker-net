@@ -27,7 +27,7 @@ namespace PalTrackerTests
         {
             var newTimeEntry = new TimeEntry(123, 456, DateTime.Parse("2012-01-02"), 12);
 
-            var createdTimeEntryId = _repository.Create(newTimeEntry).Id.Value;
+            var createdTimeEntryId = _repository.Create(newTimeEntry).Id;
 
             var foundInDb = FindInDb(createdTimeEntryId);
 
