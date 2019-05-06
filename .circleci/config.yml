@@ -55,7 +55,7 @@ jobs:
           name: Unzip artifacts
           command: |
             mkdir -p $EXTRACT_DEST
-            tar -xvzf artifacts/pal-tracke-netr-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
+            tar -xvzf artifacts/pal-tracker-net$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
 
       - run:
           name: Deploy
@@ -100,7 +100,7 @@ jobs:
           name: Unzip artifacts
           command: |
             mkdir -p $EXTRACT_DEST
-            tar -xvzf artifacts/pal-tracker-net-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
+            tar -xvzf artifacts/pal-tracker-$CIRCLE_SHA1.tgz -C $EXTRACT_DEST
 
       - run:
           name: Deploy
